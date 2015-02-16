@@ -4,7 +4,8 @@ Created on Feb 16, 2015
 @author: ian
 '''
 import job
-from jobs.job_storage import storage_actions as storage
+from jobs.job_storage import storage
+from jobs.job_storage import restore
 
 
 class job_manager(object):
@@ -18,13 +19,12 @@ class job_manager(object):
         self.jobs = []
     
     def create_job(self,name):
+        """ create job instance and storage
+        """
         new_job = job.job(name)
         store = storage(new_job)
         store.create()
         self.jobs.append(new_job)
-        
-    def refresh_jobs(self):
-        pass
         
     def get_jobs_list(self):
         return self.jobs
@@ -42,6 +42,24 @@ class job_manager(object):
             store = storage(found_job)
             store.remove()
         return None
+    
+    def restore_job(self,name):
+        restr= restore()
+        restr_job = restr.get_job(name)
+        self.jobs.append(restr_job)
+    
+    def restore_jobs(self):
+        restr= restore()
+        jobs_list = restr.get_jobs()
+        
+        for job_store in jobs_list:
+            if self.get_job(job_store.name) == None:
+                self.jobs.append(job_store)
+                
+                
+                    
+        
+        
         
         
         
