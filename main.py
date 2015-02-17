@@ -5,9 +5,10 @@ Created on Feb 16, 2015
 '''
 import job_manager
 import job
+from plugins.example_plugin.example_plugin import example_plugin
 
 if __name__ == '__main__':
-    job_mng = job_manager.job_manager()
+    #job_mng = job_manager.job_manager()
     
     # this is a list of jobs
     #for i in range(0,10):
@@ -22,11 +23,15 @@ if __name__ == '__main__':
     #for job in job_mng.get_jobs_list():
     #    print job.name
         
-    job_mng.restore_jobs()
+    #job_mng.restore_jobs()
         
-    print "\n\n Currently stored"
-    for job in job_mng.jobs:
-        print job.name
+    #print "\n\n Currently stored"
+    #for job in job_mng.jobs:
+    #    print job.name
+    example = example_plugin()
+    #print example.plugin_path()
+    
+    print example.loader()
         
         
     
